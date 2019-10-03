@@ -3,12 +3,34 @@ package aplicacao;
 import db.Db;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Programa {
 
     public static void main(String[] args) {
 
-        Connection conn = Db.abreConexao();
-        Db.fechaConexao();
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = Db.abreConexao();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("select * from departamento");
+
+            while (resultSet.next()) {
+                System.out.println(resultSet.getInt("Id") + "," + resultSet.getString("Nome"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Db.fechandoResultSet(resultSet);
+            Db.fechandoStatement(statement);
+            Db.fechaConexao();
+        }
     }
+
 }
