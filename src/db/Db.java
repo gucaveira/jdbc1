@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
-import java.util.Scanner;
 
 public class Db {
 
@@ -45,6 +44,17 @@ public class Db {
         }
     }
 
+    public static void fechandoStatement(PreparedStatement rs) {
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                throw new DbException(e.getMessage());
+            }
+        }
+
+    }
+
     public static void fechandoStatement(Statement st) {
         if (st != null) {
             try {
@@ -66,5 +76,4 @@ public class Db {
         }
 
     }
-
 }

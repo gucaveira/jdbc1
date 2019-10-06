@@ -7,11 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Programa {
+public class RecuperarDados {
 
     public static void main(String[] args) {
 
-        Connection connection = null;
+        Connection connection;
         Statement statement = null;
         ResultSet resultSet = null;
 
@@ -32,5 +32,4 @@ public class Programa {
             Db.fechaConexao();
         }
     }
-
 }
